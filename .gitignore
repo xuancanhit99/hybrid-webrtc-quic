@@ -9,4 +9,5 @@ __pycache__/
 agent/build*/
 agent/dist*/
 agent/release/
+agent/*.zip
 release/
