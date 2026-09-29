@@ -46,7 +46,10 @@ jobs:
         run: ./agent/scripts/verify-release.ps1
       - run: python agent/scripts/license-report.py --output agent/release/THIRD_PARTY_METADATA.md
       - shell: pwsh
-        run: Compress-Archive -Path agent/release/* -DestinationPath agent/HybridHostAgent-windows-x64.zip -Force
+        run: |
+          Compress-Archive -Path agent/release/* -DestinationPath agent/HybridHostAgent-windows-x64.zip -Force
+          $hash = (Get-FileHash agent/HybridHostAgent-windows-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  HybridHostAgent-windows-x64.zip" | Set-Content agent/HybridHostAgent-windows-x64-SHA256SUMS.txt -Encoding ascii
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: HybridHostAgent-windows-x64
