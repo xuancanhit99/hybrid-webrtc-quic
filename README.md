@@ -69,7 +69,7 @@ Host Windows trong [`agent/README.md`](agent/README.md) bổ sung chụp màn h�
 .\scripts\package-control-plane.ps1
 ```
 
-Artifact được ghi vào `agent\release\` và `release\`. Workflow `.github/workflows/release.yml` chạy lại test Node/Python, build và xác minh EXE Windows, tạo checksum/metadata giấy phép rồi upload hai bundle khi chạy thủ công hoặc khi push tag `hybrid-v*`. Workflow chủ ý không tạo GitHub Release, không push image và không publish repository.
+Artifact được ghi vào `agent\release\` và `release\`. Workflow `.github/workflows/release.yml` chạy lại test Node/Python, build và xác minh EXE Windows, tạo checksum/metadata giấy phép rồi tải hai bundle lên khi chạy thủ công. Khi push tag `hybrid-v*`, workflow còn tạo GitHub Release; workflow không tự tạo repository và không push image container.
 
 Để triển khai ổn định, hãy sao chép các giá trị trong `.env.example` vào môi trường của bạn (máy chủ không tự động nạp `.env`):
 
