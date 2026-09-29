@@ -1,0 +1,5 @@
+services:
+  control:
+    ports: !override []
+  coturn:
+    ports: !override []

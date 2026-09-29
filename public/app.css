@@ -1,0 +1,27 @@
+:root { color-scheme: dark; --ink: #e9f0eb; --muted: #9ea99f; --bg: #111714; --panel: #1a241e; --line: #314238; --accent: #d1f36b; --accent2: #8ad8ca; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(circle at 85% 8%, #294d40 0, transparent 33%), linear-gradient(135deg, #101511, #17231c 60%, #121916); font: 15px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+main { width: min(1100px, calc(100% - 36px)); margin: 0 auto; padding: 62px 0 80px; }
+header { max-width: 760px; margin-bottom: 42px; }
+.eyebrow { color: var(--accent); letter-spacing: .15em; font-size: 11px; }
+h1 { margin: 12px 0; font: 700 clamp(42px, 8vw, 88px)/.92 Georgia, serif; letter-spacing: -.06em; }
+h1 em { color: var(--accent2); font-style: normal; }
+.lede { color: var(--muted); max-width: 620px; font-size: 16px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.card { background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: 0 18px 48px #0004; }
+.wide { grid-column: 1 / -1; }
+h2 { font-size: 13px; color: var(--accent); letter-spacing: .1em; margin: 0 0 18px; }
+form { display: grid; gap: 11px; }
+label { display: grid; gap: 5px; color: var(--muted); font-size: 12px; }
+input, select, button { font: inherit; border-radius: 8px; border: 1px solid var(--line); padding: 10px 12px; color: var(--ink); background: #111914; }
+button { cursor: pointer; color: #14200e; border-color: var(--accent); background: var(--accent); font-weight: 700; }
+button:disabled { cursor: not-allowed; opacity: .4; }
+select { width: 100%; }
+.muted { color: var(--muted); font-size: 12px; }
+.session-row, .media-actions { display: flex; gap: 10px; align-items: center; margin-top: 15px; flex-wrap: wrap; }
+.session-row input { display: block; flex: 1; min-width: 260px; color: var(--accent2); }
+pre { min-height: 92px; max-height: 180px; overflow: auto; padding: 12px; background: #0c110e; color: #b9c9bb; border-radius: 8px; border: 1px solid var(--line); }
+video { width: 100%; min-height: 220px; max-height: 540px; object-fit: contain; background: #0a0d0b; border-radius: 10px; border: 1px solid var(--line); }
+video.input-enabled { cursor: crosshair; outline: 2px solid var(--accent); outline-offset: 3px; }
+.downloads a { display: inline-block; margin: 12px 10px 0 0; color: var(--accent2); }
+@media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .wide { grid-column: auto; } main { padding-top: 30px; } }

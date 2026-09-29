@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid Mesh Lab</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">HYBRID MESH LAB / LOCAL PROTOTYPE</p>
+      <h1>Direct when possible.<br><em>Relayed when necessary.</em></h1>
+      <p class="lede">A small control plane for browser WebRTC sessions, with a transport-neutral file protocol ready for QUIC.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <h2>1 / Identity</h2>
+        <form id="enroll-form">
+          <label>Email <input id="email" type="email" value="demo@example.test" required></label>
+          <label>Name <input id="name" value="Demo operator" required></label>
+          <button>Issue development token</button>
+        </form>
+        <p id="identity" class="muted">No token yet.</p>
+      </article>
+      <article class="card">
+        <h2>2 / Device</h2>
+        <form id="device-form">
+          <label>Device name <input id="device-name" value="Browser node"></label>
+          <label>Platform <input id="platform" value="browser"></label>
+          <button>Enroll device</button>
+        </form>
+        <select id="device-list" aria-label="Your devices"><option value="">No devices</option></select>
+      </article>
+      <article class="card wide">
+        <h2>3 / Session</h2>
+        <form id="session-form">
+          <label>Source device <select id="source-device"></select></label>
+          <label>Target device ID <input id="target-device" list="device-options" placeholder="dev_..."></label>
+          <datalist id="device-options"></datalist>
+          <button>Create session</button>
+        </form>
+        <div class="session-row"><input id="session-id" placeholder="Paste ses_... to join"><button id="use-session">Use session</button><button id="connect" disabled>Connect signaling</button></div>
+        <pre id="log" aria-live="polite"></pre>
+      </article>
+      <article class="card wide media-card">
+        <h2>4 / WebRTC media</h2>
+        <p class="muted">The signaling channel forwards only SDP/ICE. Capture and input permissions stay in the browser.</p>
+        <video id="remote-video" autoplay playsinline controls tabindex="0"></video>
+        <div class="media-actions"><button id="share-screen">Share this browser screen</button><button id="request-host-screen" disabled>Request host screen</button><button id="enable-input" disabled>Enable remote input</button><button id="send-ping" disabled>Send data ping</button><button id="send-file" disabled>Send a small file</button><input id="file-input" type="file" hidden></div>
+        <p id="input-status" class="muted">Remote input is off. The host must opt in locally.</p>
+        <div id="downloads" class="downloads"></div>
+      </article>
+    </section>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

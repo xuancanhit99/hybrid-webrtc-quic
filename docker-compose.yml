@@ -1,0 +1,44 @@
+services:
+  control:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 8787
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://127.0.0.1:8787}
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET to at least 32 random characters}
+      ENROLLMENT_TOKEN: ${ENROLLMENT_TOKEN:?Set ENROLLMENT_TOKEN to at least 16 random characters}
+      TURN_URL: ${TURN_URL:-turn:127.0.0.1:3478}
+      TURN_SECRET: ${TURN_SECRET:?Set TURN_SECRET in .env before starting the stack}
+    ports:
+      - "${CONTROL_BIND:-127.0.0.1}:${CONTROL_PORT:-8787}:8787"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8787/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  coturn:
+    image: coturn/coturn:4.6
+    restart: unless-stopped
+    command:
+      - -c
+      - /etc/coturn/turnserver.conf
+      - --listening-ip=${TURN_LISTENING_IP:-0.0.0.0}
+      - --external-ip=${TURN_EXTERNAL_IP:-127.0.0.1}
+      - --static-auth-secret=${TURN_SECRET:?Set TURN_SECRET in .env before starting coturn}
+    ports:
+      - "${TURN_BIND:-127.0.0.1}:3478:3478/udp"
+      - "${TURN_BIND:-127.0.0.1}:3478:3478/tcp"
+      - "${TURN_BIND:-127.0.0.1}:49160-49200:49160-49200/udp"
+    volumes:
+      - ./coturn/turnserver.conf:/etc/coturn/turnserver.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "turnutils_stunclient -p 3478 127.0.0.1 >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

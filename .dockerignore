@@ -1,0 +1,12 @@
+.git
+.env
+agent/.venv
+agent/**/__pycache__
+node_modules
+test
+coverage
+*.log
+agent/build*
+agent/dist*
+agent/release
+release

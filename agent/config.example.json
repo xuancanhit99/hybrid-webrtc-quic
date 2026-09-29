@@ -1,0 +1,22 @@
+{
+  "control_url": "http://127.0.0.1:8787",
+  "token": "",
+  "device_id": "",
+  "session_id": "ses_replace_me",
+  "email": "host@example.test",
+  "user_name": "Windows host operator",
+  "device_name": "Windows host",
+  "platform": "windows-agent",
+  "enrollment_token": "",
+  "download_dir": "RemoteInbox",
+  "send_file": null,
+  "share_screen": true,
+  "allow_input": false,
+  "unattended": false,
+  "consent_file": null,
+  "max_file_mb": 8,
+  "monitor": 1,
+  "fps": 15,
+  "max_width": 1920,
+  "insecure_http": true
+}

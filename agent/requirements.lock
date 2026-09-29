@@ -1,0 +1,5 @@
+aiohttp==3.11.18
+aiortc==1.15.0
+mss==10.2.0
+pynput==1.8.2
+numpy==2.2.4
